@@ -80,15 +80,17 @@ function getItemData() {
 
   })
 }
-function updateQuantity(id, new_Quantity){
+function updateQuantity(sel_id, new_Quantity){
+  console.log("here"+sel_id)
+  console.log("here5"+new_Quantity)
   var query = connection.query("UPDATE products SET ? WHERE ?",
   [
     {
       // quantity: 
-      id:id
+      stock_quantity: new_Quantity
     },
     {
-      stock_quantity: new_Quantity
+      id:sel_id
     }
   ],function(err){
     if (err) throw err
