@@ -1,7 +1,10 @@
 // import the required npm packages
 var inquirer = require("inquirer");
 var mysql = require("mysql");
-var colors = require("colors")
+var colors = require("colors");
+const cTable = require('console.table');
+
+// var table = require()
 // connect to the database
 var connection = mysql.createConnection({
   host: "localhost",
@@ -22,12 +25,8 @@ connection.connect(function (err) {
 function displayItems() {
   connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err;
-    // Log all results of the SELECT statement
-    console.log(`| item id  |    Product name   |   Category    |   Price   |`.red)
-    console.log(`|----------|-------------------|---------------|-----------|`.red)
-    for (var i = 0; i < res.length; i++) {
-      console.log("|     ".red + `${res[i].id}`.yellow + "    |  ".red + `${res[i].product_name}`.yellow + "  |  ".red + `${res[i].department_name}`.yellow + "  |  ".red + `${res[i].price}`.yellow + "  |".red)
-    }
+   
+    console.table(res);
     startPrompt()
   });
 }
